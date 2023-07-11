@@ -12,14 +12,23 @@ def convert_ap_to_glc(transitions):
 			if a == '':
 				glc_rule = f"$$[{q}{B}{p}] -> ε$$"
 				glc_rules.append(glc_rule)
+
 			# Regra para transição sem mexer na pilha
 			else:
 				glc_rule = f"$$[{q}{B}{p}] -> {a}$$"
 				glc_rules.append(glc_rule)
 
 			
-			
-		# Regra para transição com empilhamento e desempilhamento
+		# Regra para transição com empilhamento de um simbolo e desempilhamento simultâneo
+		elif len(CD) == 1:
+			for j in Q:
+					productions += f"[{p}{CD[0]}{j}]]"
+					variable = f"{q}{B}{j}"
+					glc_rule = f"$$[{variable}] -> {a}{productions}$$"
+					glc_rules.append(glc_rule)
+					productions = ''	
+
+		# Regra para transição com empilhamento de dois simbolos e desempilhamento simultâneo
 		elif len(CD) == 2:
 			for j in Q:
 				for i in Q:
@@ -33,7 +42,7 @@ def convert_ap_to_glc(transitions):
 
 # Exemplo de uso
 transitions = [
-	('q_1', '1', '1', 'q_1', 'ε'),
+	('q', '0', 'x', 'p', 'x'),
 ]
 
 glc_rules = convert_ap_to_glc(transitions)
