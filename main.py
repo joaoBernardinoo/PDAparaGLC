@@ -1,3 +1,4 @@
+# Estados do autômato vão aqui
 Q = ['Q_n','q_0','q_1','q_2','Q_f']
 def convert_ap_to_glc(transitions):
 	glc_rules = []
@@ -50,3 +51,4 @@ glc_rules = convert_ap_to_glc(transitions)
 # Exibir as regras de produção da GLC
 for rule in glc_rules:
 	print(rule)
+	# A saída está em LaTeX
